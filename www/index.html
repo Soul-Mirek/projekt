@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="author" content="Michał Mirowski"/>
-	<title>Niezbędnik studenta</title>
+	<title>Notatnik_UEK</title>
 	<link rel="shortcut icon" href="../favicon.ico">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
@@ -43,7 +43,7 @@
   document.addEventListener("deviceready", onDeviceReady, false);
   // PhoneGap is ready
   //
-	function onDeviceReady() {
+	 /* function onDeviceReady() {
 		document.getElementById("info").innerHTML = 
 			"wykaz: " + device.cordova + "<br>" +
 			//	"Nazwa: " + device.name + "<br>" +
@@ -53,7 +53,7 @@
 			"UUID: " + device.uuid + "<br>" +
 			"Wersja: " + device.version + "<br>" ;
 		document.addEventListener("backbutton", onBackKeyDown, false);	
-	}
+	}*/
 	document.addEventListener("deviceready", checkConnection, false);
 	function checkConnection() {
 		var networkState = navigator.connection.type;
@@ -123,7 +123,7 @@
 	</div><!-- /header -->
 	<div data-role="page" id="a">
 		<div role="main" class="ui-content">
-		<h2>Witaj w moim niezbędniku</h2>
+		<h2>Witaj w notatniku UEK</h2>
 		<center>
 			<img src="photo.jpg" style="width: 330px" />
 		</center>
@@ -168,7 +168,7 @@
 		</div>
 	</div>
 	
-	<div data-role="page" data-theme="a" id="biorytm">
+	<!--<div data-role="page" data-theme="a" id="biorytm">
 		<div data-role="panel" id="outside" data-theme="b" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-b ui-panel-animate ui-panel-open">
 			<div class="ui-panel-inner">
 				<ul data-role="listview" class="ui-listview">
@@ -191,7 +191,7 @@
 			<form>
 			<input type="date" id="date_val" data-role="datebox" data-options='{"mode": "calbox", "useNewStyle":true}'>
 			<input type="button" id="dalej" value="Śprawdź"></input>			
-			<!-- biorytm -->
+			 // biorytm //
 			<script>
 				$('#dalej').click(
 					function fbiorytm(){
@@ -276,7 +276,7 @@
 		</div>	
 	</div>	
 	
-	<div data-role="page" data-theme="a" id="urzadzenie">		
+	<!--<div data-role="page" data-theme="a" id="urzadzenie">		
 		<div data-role="panel" id="outside" data-theme="b" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-b ui-panel-animate ui-panel-open">
 			<div class="ui-panel-inner">
 				<ul data-role="listview" class="ui-listview">
@@ -338,21 +338,21 @@
 					});
 				});		
 			</script>
-		</div>
+		</div> 
 		<div data-role="footer" data-position="fixed; bottom: 0; width: 100%">
 			<h1>&copy; Michał Mirowski</h1>		
 		</div>
-	</div>
+	</div> -->
 	
 	<div data-role="panel" id="outside" data-theme="b">
 		<ul data-role="listview">
 			<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
 			<li class="ui-li-static ui-body-inherit"><a href="#autor"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Autor</a></li>
-			<li class="ui-li-static ui-body-inherit"><a href="#biorytm" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Biorytm</a></li>
+			<!--<li class="ui-li-static ui-body-inherit"><a href="#biorytm" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Biorytm</a></li>-->
 			<li class="ui-li-static ui-body-inherit"><a href="#skaner"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Skaner</a></li>
 			<li class="ui-li-static ui-body-inherit"><a href="#mapa" onclick="loadMap();" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Mapa</a></li>
-			<li class="ui-li-static ui-body-inherit"><a href="#urzadzenie"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Urządzenie</a></li>
-			<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>
+			<!--<li class="ui-li-static ui-body-inherit"><a href="#urzadzenie"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Urządzenie</a></li>
+			<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>-->
 		</ul>
 	</div>
 </body>

@@ -1,7 +1,7 @@
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.projekt.niezbednik" version="1.0.0">
   <name>projekt</name>
-  <description>Hello World sample application that responds to the deviceready event.</description>
-  <author href="http://phonegap.com" email="support@phonegap.com">PhoneGap Team</author>
+  <description>Niezbędnik studenta</description>
+  <author email="michal.l.mirowski@gmail.com">Michał Mirowski</author>
   <content src="index.html"/>
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="14"/>
@@ -25,9 +25,9 @@
   <plugin name="cordova-plugin-statusbar" source="npm"/>
   <plugin name="cordova-plugin-vibration" source="npm"/>
   <plugin name="cordova-plugin-whitelist" source="npm"/>
-  <icon src="icon.png"/>
+  <icon src="photo.jpg"/>
   <platform name="android">
-    <icon src="www/res/icon/android/drawable-ldpi-icon.png" density="ldpi"/>
+    <icon src="www/res/icon/android/photo.jpg" density="ldpi"/>
     <icon src="www/res/icon/android/drawable-mdpi-icon.png" density="mdpi"/>
     <icon src="www/res/icon/android/drawable-hdpi-icon.png" density="hdpi"/>
     <icon src="www/res/icon/android/drawable-xhdpi-icon.png" density="xhdpi"/>
@@ -96,12 +96,14 @@
     <icon src="www/res/icon/windows/Wide310x150Logo.scale-240.png" platform="windows" width="744" height="360"/>
     <splash src="www/res/screen/windows/SplashScreenPhone.scale-240.png" platform="windows" width="1152" height="1920"/>
   </platform>
+  <access origin="http://maps.google.com" />
+  <access origin="http://*.google.com" />
   <access origin="*"/>
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
-  <allow-intent href="tel:*"/>
+  <allow-intent href="tel:880141837"/>
   <allow-intent href="sms:*"/>
-  <allow-intent href="mailto:*"/>
+  <allow-intent href="mailto:michal.l.mirowski@gmail"/>
   <allow-intent href="geo:*"/>
   <platform name="android">
     <allow-intent href="market:*"/>
@@ -110,4 +112,21 @@
     <allow-intent href="itms:*"/>
     <allow-intent href="itms-apps:*"/>
   </platform>
+  
+  <feature name="MWBarcodeScanner">
+      <param name="android-package" value="com.manateeworks.BarcodeScannerPlugin" />
+  </feature>
+	
+  <feature name="Flashlight">
+   	  <param name="android-package" value="nl.xservices.plugins.Flashlight" />
+  </feature>
+
+  <gap:plugin name="org.apache.cordova.dialogs" />
+  <gap:plugin name="org.apache.cordova.device" spec="0.3.0" source="pgb" />
+
+  <gap:plugin name="manateeworks-barcodescanner" spec="1.8.6" source="npm"/>
+  <gap:plugin name="org.apache.cordova.network-information" spec="0.2.15" source="pgb" />
+  <gap:plugin name="nl.x-services.plugins.flashlight" spec="2.0.1" source="pgb" />
+
+  
 </widget>

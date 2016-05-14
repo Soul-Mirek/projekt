@@ -144,11 +144,11 @@
 				<ul data-role="listview" class="ui-listview">
 					<li data-icon="back" class="ui-first-child"><a href="#" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-back">Zamknij</a></li>
 					<li class="ui-li-static ui-body-inherit"><a href="#autor"  style="pointer-events: none"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Autor</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#biorytm" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Biorytm</a></li>
+					<li class="ui-li-static ui-body-inherit"><a href="#addNote" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">addNote</a></li>
 					<li class="ui-li-static ui-body-inherit"><a href="#skaner"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Skaner</a></li>
 					<li class="ui-li-static ui-body-inherit"><a href="#mapa" onclick="loadMap();"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Mapa</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#urzadzenie"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Urządzenie</a></li>
-					<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>
+					<li class="ui-li-static ui-body-inherit"><a href="#printNotes"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Urządzenie</a></li>
+					<!--<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>-->
 				</ul>
 			</div>
 		</div>
@@ -168,52 +168,34 @@
 		</div>
 	</div>
 	
-	<!--<div data-role="page" data-theme="a" id="biorytm">
+	<div data-role="page" data-theme="a" id="addNote">
 		<div data-role="panel" id="outside" data-theme="b" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-b ui-panel-animate ui-panel-open">
 			<div class="ui-panel-inner">
 				<ul data-role="listview" class="ui-listview">
 					<li data-icon="back" class="ui-first-child"><a href="#" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-back">Zamknij</a></li>
 					<li class="ui-li-static ui-body-inherit"><a href="#autor"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Autor</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#biorytm" style="pointer-events: none" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Biorytm</a></li>
+					<li class="ui-li-static ui-body-inherit"><a href="#addNote" style="pointer-events: none" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">addNote</a></li>
 					<li class="ui-li-static ui-body-inherit"><a href="#skaner"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Skaner</a></li>
 					<li class="ui-li-static ui-body-inherit"><a href="#mapa" onclick="loadMap();" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Mapa</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#urzadzenie"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Urządzenie</a></li>
-					<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>
+					<li class="ui-li-static ui-body-inherit"><a href="#printNotes"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Urządzenie</a></li>
+					<!--<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>-->
 				</ul>
 			</div>
 		</div>		
 		<div data-role="header">
 			<a href="#outside" data-icon="bars" data-iconpos="notext" class="ui-btn-left ui-link ui-btn ui-icon-bars ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button">Menu</a>
-			<h1>Biorytm</h1>
+			<h1>addNote</h1>
 		</div>
-		<div data-role="content" class="ui-content">	
-			<p>Podaj datę urodzin</p>	
-			<form>
-			<input type="date" id="date_val" data-role="datebox" data-options='{"mode": "calbox", "useNewStyle":true}'>
-			<input type="button" id="dalej" value="Śprawdź"></input>			
-			 // biorytm //
-			<script>
-				$('#dalej').click(
-					function fbiorytm(){
-					var data2 = document.getElementById("date_val").value; 
-					var today = new Date();     //Mon Mar 21 2016 14:13:55 GMT+0530 (IST) 
-					var d = new Date(data2);     //Mon Mar 21 2016 00:00:00 GMT+0530 (IST) 
-					var todayDateOnly = new Date(today.getFullYear(),today.getMonth(),today.getDate()); //This will write a Date with time set to 00:00:00 so you kind of have date only
-					var dDateOnly = new Date(d.getFullYear(),d.getMonth(),d.getDate());
-					var liczbaSekund = todayDateOnly - dDateOnly;
-					var liczbaDni = liczbaSekund/86400000;
-					var fizyczny = Math.sin(2*Math.PI*liczbaDni/23)*100;
-					var emocjonalny = Math.sin(2*Math.PI*liczbaDni/28)*100;
-					var intelektualny = Math.sin(2*Math.PI*liczbaDni/33)*100;
-					//document.getElementById("biorytm").innerHTML = 
-					alert("Biorytm fizyczny: " + Math.round(fizyczny) + "%\n" + 
-						"Biorytm emocjonalny: " + Math.round(emocjonalny) + "%\n" + 
-						"Biorytm intelektualny: " + Math.round(intelektualny) + "%" );
-				});			
-			</script>			
-			<p id="biorytm">Hello biorytm</p>		
-			</form>
-		</div>		
+		<div data-role="main" class="ui-content">	
+			<div id="createNote">
+			<div  data-role="fieldcontain">
+				<label>Note text</label>
+				<textarea  id="noteText"></textarea>
+				<input type="button" value="Add photo" onclick="makeAndAddPhotoToDb()" />
+				</div>
+				<input type="button" value="Add note" onclick="addNoteToDb()" />
+			</div>	
+		</div>
 		<div data-role="footer" data-position="fixed; bottom: 0; width: 100%">
 			<h1>&copy; Michał Mirowski</h1>		
 		</div>	
@@ -225,11 +207,11 @@
 				<ul data-role="listview" class="ui-listview">
 					<li data-icon="back" class="ui-first-child"><a href="#" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-back">Zamknij</a></li>			
 					<li class="ui-li-static ui-body-inherit"><a href="#autor"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Autor</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#biorytm" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Biorytm</a></li>
+					<li class="ui-li-static ui-body-inherit"><a href="#addNote" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">addNote</a></li>
 					<li class="ui-li-static ui-body-inherit"><a href="#skaner" style="pointer-events: none"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Skaner</a></li>
 					<li class="ui-li-static ui-body-inherit"><a href="#mapa" onclick="loadMap();" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Mapa</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#urzadzenie"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Urządzenie</a></li>
-					<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>
+					<li class="ui-li-static ui-body-inherit"><a href="#printNotes"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Urządzenie</a></li>
+					<!--<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>-->
 				</ul>
 			</div>
 		</div>
@@ -253,11 +235,11 @@
 				<ul data-role="listview" class="ui-listview">
 					<li data-icon="back" class="ui-first-child"><a href="#" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-back">Zamknij</a></li>				
 					<li class="ui-li-static ui-body-inherit"><a href="#autor"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Autor</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#biorytm" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Biorytm</a></li>
+					<li class="ui-li-static ui-body-inherit"><a href="#addNote" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">addNote</a></li>
 					<li class="ui-li-static ui-body-inherit"><a href="#skaner"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Skaner</a></li>
 					<li class="ui-li-static ui-body-inherit"><a href="#mapa" onclick="loadMap();" style="pointer-events: none"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Mapa</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#urzadzenie"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Urządzenie</a></li>
-					<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>				
+					<li class="ui-li-static ui-body-inherit"><a href="#printNotes"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Urządzenie</a></li>
+					<!--<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>-->				
 				</ul>
 			</div>
 		</div>		
@@ -276,45 +258,51 @@
 		</div>	
 	</div>	
 	
-	<!--<div data-role="page" data-theme="a" id="urzadzenie">		
+	<div data-role="page" data-theme="a" id="printNotes">		
 		<div data-role="panel" id="outside" data-theme="b" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-b ui-panel-animate ui-panel-open">
 			<div class="ui-panel-inner">
 				<ul data-role="listview" class="ui-listview">
 					<li data-icon="back" class="ui-first-child"><a href="#" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-back">Zamknij</a></li>				
 					<li class="ui-li-static ui-body-inherit"><a href="#autor"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Autor</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#biorytm" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Biorytm</a></li>
+					<li class="ui-li-static ui-body-inherit"><a href="#addNote" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">addNote</a></li>
 					<li class="ui-li-static ui-body-inherit"><a href="#skaner"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Skaner</a></li>
 					<li class="ui-li-static ui-body-inherit"><a href="#mapa" onclick="loadMap();" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Mapa</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#urzadzenie"  style="pointer-events: none" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Urządzenie</a></li>
-					<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>				
+					<li class="ui-li-static ui-body-inherit"><a href="#printNotes"  style="pointer-events: none" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Urządzenie</a></li>
+					<!--<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>-->				
 				</ul>
 			</div>
-		</div>	
+		</div>
+		<div data-role="popup" id="menu" data-theme="a">
+			<ul data-role="listview" data-theme="c" data-inset="true">
+				<li data-role="divider" data-theme="a">Note Menu</li>
+				<li><button onclick=deleteNote()>Delete note</button></li>
+			</ul>
+		</div>		
 		<div data-role="header">
 			<a href="#outside" data-icon="bars" data-iconpos="notext" class="ui-btn-left ui-link ui-btn ui-icon-bars ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button">Menu</a>
 			<h1>INFO</h1>
 		</div>
-		<div data-role="content" class="ui-content">	
-			<p>Informacje o telefonie:</p>
-			<br><br>
-			<p id="info">Pobieram informację o urządzeniu...</p>
-			<p id="infosiec">Pobieram informację o sieci...</p>									
-		</div>	
+		<div data-role="content" class="ui-content">
+			<div id="printNote"></div>
+			<script>
+				printNotes();
+			</script>
+		</div>
 		<div data-role="footer" data-position="fixed; bottom: 0; width: 100%">
 			<h1>&copy; Michał Mirowski</h1>		
 		</div>	
 	</div>
-		
+	<!--	
 	<div data-role="page" data-theme="a" id="latarka">		
 		<div data-role="panel" id="outside" data-theme="b" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-b ui-panel-animate ui-panel-open">
 			<div class="ui-panel-inner">
 				<ul data-role="listview" class="ui-listview">
 					<li data-icon="back" class="ui-first-child"><a href="#" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-back">Zamknij</a></li>				
 					<li class="ui-li-static ui-body-inherit"><a href="#autor"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Autor</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#biorytm" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Biorytm</a></li>
+					<li class="ui-li-static ui-body-inherit"><a href="#addNote" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">addNote</a></li>
 					<li class="ui-li-static ui-body-inherit"><a href="#skaner"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Skaner</a></li>
 					<li class="ui-li-static ui-body-inherit"><a href="#mapa" onclick="loadMap();" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Mapa</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#urzadzenie"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Urządzenie</a></li>
+					<li class="ui-li-static ui-body-inherit"><a href="#printNotes"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Urządzenie</a></li>
 					<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  style="pointer-events: none" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>				
 				</ul>
 			</div>
@@ -348,11 +336,11 @@
 		<ul data-role="listview">
 			<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
 			<li class="ui-li-static ui-body-inherit"><a href="#autor"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Autor</a></li>
-			<!--<li class="ui-li-static ui-body-inherit"><a href="#biorytm" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Biorytm</a></li>-->
+			<<li class="ui-li-static ui-body-inherit"><a href="#addNote" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">addNote</a></li>
 			<li class="ui-li-static ui-body-inherit"><a href="#skaner"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Skaner</a></li>
 			<li class="ui-li-static ui-body-inherit"><a href="#mapa" onclick="loadMap();" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Mapa</a></li>
-			<!--<li class="ui-li-static ui-body-inherit"><a href="#urzadzenie"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Urządzenie</a></li>
-			<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>-->
+			<li class="ui-li-static ui-body-inherit"><a href="#printNotes"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Urządzenie</a></li>
+			<!--<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>-->
 		</ul>
 	</div>
 </body>

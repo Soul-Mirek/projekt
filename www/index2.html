@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Michał Mirowski"/>
+	<title>przelicznik prędkości</title>
+	<link rel="shortcut icon" href="../favicon.ico">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.mobile-1.4.5.min.js"></script>
+	<script type="text/javascript" src="phonegap.js" charset="utf-8"></script>
+	<script>
+		$( document ).on( "pagecreate", function() {
+			$( "body > [data-role='panel']" ).panel();
+			$( "body > [data-role='panel'] [data-role='listview']" ).listview();
+		});
+		$( document ).one( "pageshow", function() {
+			$( "body > [data-role='header']" ).toolbar();
+			$( "body > [data-role='header'] [data-role='navbar']" ).navbar();
+		});
+	</script>
+	<script>
+	$(document).ready(function() {
+		$("#obliczPredkosc").click(function(){
+			km = $("#nb").val();
+			alert((km / 3.6) + " m/s");        
+			}); 
+		});
+	</script>
+</head>
+<body>
+	<div data-role="page" id="a">
+		<div role="main" class="ui-content">
+		<h2>Witaj w aplikacji przelicznik prędkości</h2>
+
+		</div><!-- /content -->
+		<!--<div data-role="panel" id="inside-a" data-position="right" data-display="overlay" data-theme="b"></div>-->
+		<div data-role="header" data-position="fixed" data-theme="a">
+			<h1>przelicznik prędkości</h1>
+		</div>
+		<input id='nb' name="nb" type="number" placeholder="Number"/>
+		<button class="ui-btn" id="obliczPredkosc">Przelicz</button>
+		
+		
+		<div data-role="footer" data-position="fixed; bottom: 0; width: 100%">
+			<h1>&copy; Michał Mirowski</h1>		
+		</div>
+	</div><!-- /page -->
+</body>
+</html>

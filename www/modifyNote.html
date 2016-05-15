@@ -33,13 +33,13 @@
 </head>
 
 <body>
-	<div data-role="page" id="pageone">
-
-		<div data-role="header">
+	<div data-role="page" id="modify">
+		<div data-role="header" data-position="fixed" data-theme="a">
+			<h1>UEK Note</h1>
+			<a href="#outside" data-icon="bars" data-iconpos="notext">Menu</a>
+			<a href="#plusNote" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-grid ui-nodisc-icon ui-alt-icon ui-btn-right">Add</a>
 		</div>
-
 		<div data-role="main" class="ui-content">
-			
 			<div id="createNote">
 			<div  data-role="fieldcontain">
 				<label>Note text</label>
@@ -52,8 +52,8 @@
 				<input type="button" value="Modify note" onclick="modifyNoteInDb()" />
 			</div>	
 		</div>
-
-		<div data-role="footer">
+		<div data-role="footer" data-position="fixed; bottom: 0; width: 100%">
+			<h1>&copy; Jakób Woźniczka & Michał Mirowski</h1>
 		</div>
 	</div>
 	<script>

@@ -47,3 +47,40 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+
+function getCodeFunction()
+{
+	
+	cordova.plugins.barcodeScanner.scan(
+      function (result) {
+          alert("We got a barcode\n" +
+                "Result: " + result.text + "\n" +
+                "Format: " + result.format + "\n" +
+                "Cancelled: " + result.cancelled);
+      }, 
+      function (error) {
+          alert("Scanning failed: " + error);
+      }
+   );
+}
+function callAuthorPage()
+{
+    window.location = "author_page.html";
+}
+function callUekPage()
+{
+	var networkState = navigator.network.connection.type;
+    if(networkState == Connection.WIFI || networkState == Connection.CELL_3G || networkState == Connection.CELL_4G )
+	{
+		window.location = "uek.html";
+	}
+	else
+	{
+		alert("Pls connnect with wify/3g/4g");
+   
+	}
+}
+	
+}
+
+

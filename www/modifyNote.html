@@ -27,7 +27,6 @@
 	}
 
 	function onDeviceReady() {
-		// navigator.notification.alert("PhoneGap is working");
 	}
 </script>
 <title>Hello World</title>
@@ -50,7 +49,7 @@
 				<input type="button" value="Get localization" id = "localizationbutton" />
 			
 				</div>
-				<input type="button" value="Add note" onclick="addNoteToDb()" />
+				<input type="button" value="Modify note" onclick="modifyNoteInDb()" />
 			</div>	
 		</div>
 
@@ -58,10 +57,26 @@
 		</div>
 	</div>
 	<script>
-	
-	$(document).ready(function(){
+	$(document).ready(function()
+			{
+		var currentKey = window.sessionStorage.getItem("currentKey");
+
+		for (var i = 0; i < localStorage.length; i++){
+			var localStorageElement = localStorage.key(i);
+			if(isNaN(localStorageElement)==false)
+			{
+				if(currentKey == localStorage.getItem(localStorageElement))
+				{
+					$('#noteText').text(localStorage.getItem(localStorageElement));  
+					return;
+				}
+			}
+		} 
+
+	});
+		$(document).ready(function(){
 		$('#localizationbutton').click(function(){
-			
+		
 			var onSuccess = function(position) {
 				var note = $('#noteText').val();
 				$('#noteText').val(note + "\n" +
@@ -87,8 +102,6 @@
 	});
 	$(document).ready(function(){
 		$('#datebutton').click(function(){
-			alert("begin");
-
 			var options = {
 					  date: new Date(),
 					  mode: 'date'

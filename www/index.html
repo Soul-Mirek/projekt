@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="author" content="Michał Mirowski"/>
-	<title>Notatnik_UEK</title>
+	<meta charset="utf-8" />
+	<meta name="author" content="Jakób Woźniczka & Michał Mirowski"/>
+	<title>UEK Note</title>
 	<link rel="shortcut icon" href="../favicon.ico">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
-	<script src="js/jquery.js"></script>
-	<script src="js/jquery.mobile-1.4.5.min.js"></script>
-	<script type="text/javascript" src="phonegap.js" charset="utf-8"></script>
-	<script type="text/javascript" src="js\MWBScanner.js" charset="utf-8"></script>
-	<script type="text/javascript" src="js\MWBConfig.js" charset="utf-8"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="msapplication-tap-highlight" content="no" />
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+	<!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" href="css/jqm-demos.css">
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
+	<script type="text/javascript" charset="utf-8" src="cordova-1.5.0.js"></script>
+	<script src="js/pageTransition.js"></script>
+	<script src="js/noteOperations.js"></script>
+	<script type="text/javascript" charset="utf-8">
+	function onLoad() {
+		document.addEventListener("deviceready", onDeviceReady, true);
+	}
+
+	function onDeviceReady() {
+		// navigator.notification.alert("PhoneGap is working");
+	}
+	</script>
 	<script>
 		$( document ).on( "pagecreate", function() {
 			$( "body > [data-role='panel']" ).panel();
@@ -23,325 +35,81 @@
 			$( "body > [data-role='header'] [data-role='navbar']" ).navbar();
 		});
 	</script>
-	<!--<script>
-  var myCenter=new google.maps.LatLng(50.068549,19.953896);
-  function initialize()
-  {
-  var mapProp = {
-    center:myCenter,
-    zoom:15,
-    mapTypeId:google.maps.MapTypeId.ROADMAP
-    };
-  var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-	}
-  google.maps.event.addDomListener(window, 'load', initialize);
-	</script>-->
-	<!-- zais/odczyt -->
-	<script>
-  // Wait for PhoneGap to load
-  //
-  document.addEventListener("deviceready", onDeviceReady, false);
-  // PhoneGap is ready
-  //
-	 /* function onDeviceReady() {
-		document.getElementById("info").innerHTML = 
-			"wykaz: " + device.cordova + "<br>" +
-			//	"Nazwa: " + device.name + "<br>" +
-			//	"PhoneGap: " + device.phonegap + "<br>" +
-			"Model: " + device.model + "<br>" +
-			"Platforma: " + device.platform + "<br>" +
-			"UUID: " + device.uuid + "<br>" +
-			"Wersja: " + device.version + "<br>" ;
-		document.addEventListener("backbutton", onBackKeyDown, false);	
-	}*/
-	document.addEventListener("deviceready", checkConnection, false);
-	function checkConnection() {
-		var networkState = navigator.connection.type;
-		var states = {};
-		<!--states[Connection.UNKNOWN]  = 'Nieznane';
-		<!--states[Connection.ETHERNET] = 'Ethernet';
-		<!--states[Connection.WIFI]     = 'WiFi';
-		<!--states[Connection.CELL_2G]  = 'Komórkowe 2G';
-		<!--states[Connection.CELL_3G]  = 'Komórkowe 3G';
-		<!--states[Connection.CELL_4G]  = 'Komórkowe 4G';
-		<!--states[Connection.CELL]     = 'Komórkowe';
-		<!--states[Connection.NONE]     = 'Brak sieci';
-		<!--document.getElementById("infosiec").innerHTML = 'Typ połączenia: ' + states[networkState];
-		<!--document.getElementById("mapapolaczenie").innerHTML = 'Typ połączenia: ' + states[networkState];
-		states[Connection.UNKNOWN]  = 0;
-		states[Connection.ETHERNET] = 1;
-		states[Connection.WIFI]     = 1;
-		states[Connection.CELL_2G]  = 0;
-		states[Connection.CELL_3G]  = 1;
-		states[Connection.CELL_4G]  = 1;
-		states[Connection.CELL]     = 0;
-		states[Connection.NONE]     = 0;
-		return states[networkState];
-	}
-	function loadMap() {
-		if (checkConnection() == 0) {
-			alert("W celu ochrony łącza nie ładujemy mapy. Sprawdź czy na pewno masz włączone połączenie 3G, 4G lub Wi-Fi.");
-		} else {
-			var myDevice = document.getElementById('googleMap'); // div w htmlu
-			myDevice.innerHTML = '<center><iframe style="width:100%;height:100%;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2560.946430304851!2d19.95293141571755!3d50.06856487942447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47165b1eec963ba1%3A0x128f85b29388690a!2sUniwersytet+Ekonomiczny+w+Krakowie!5e0!3m2!1spl!2sus!4v1460144200365" frameborder="0" style="border:0" ></iframe></center>';
-		}
-	}
-	function onBackKeyDown() {
-		navigator.app.exitApp();
-	}
-	</script>
-	<script>
-	$(document).ready(function(){	
-		$('#skanerbutton').click(scanner.startScanning)
-	});	
-	</script>	
-	<script>
-		
-	$(document).ready(function(){
-		$('#skanerfdbutton').click(function(){
-			cordova.plugins.barcodeScanner.scan(
-				function (result) {
-					document.getElementById("skanerp").innerHTML = "We got a barcode\n" +
-						"Result: " + result.text + "\n" +
-						"Format: " + result.format + "\n" +
-						"Cancelled: " + result.cancelled + 
-						"Success: " + success + "\n" +
-						"Fail: " + fail + "\n" ;
-					}, 
-				function (error) {
-					document.getElementById("skan").innerHTML ="Scanning failed: " + error ;
-				}
-			);	
+	<script type="text/javascript">
+		var currentKey;
+		$("a").on("click", function() {
+			currentKey = $(this).text();
 		});
-	});
 	</script>
+	<!--<script src="http://www.w3schools.com/lib/w3data.js"></script>-->
 </head>
 <body>
-	<!--<div data-role="header" data-position="fixed" data-theme="a">
-		<h1>Home Page UEK</h1>
-		<a href="#outside" data-icon="bars" data-iconpos="notext">Menu</a>
-	</div><!-- /header -->
-	<div data-role="page" id="a">
-		<div role="main" class="ui-content">
-		<h2>Witaj w notatniku UEK</h2>
-		<center>
-			<img src="photo.jpg" style="width: 330px" />
-		</center>
-		</div><!-- /content -->
-		<!--<div data-role="panel" id="inside-a" data-position="right" data-display="overlay" data-theme="b"></div>-->
+	<div data-role="page" id="homepage">
+		<div data-role="popup" id="menu" data-theme="a">
+			<ul data-role="listview" data-theme="c" data-inset="true">
+				<li data-role="divider" data-theme="a">Note Menu</li>
+				<li><button onclick=deleteNote()>Delete note</button></li>
+				<li><button onclick=modifyNoteInDb()>Modify note</button></li>
+			</ul>
+		</div>
 		<div data-role="header" data-position="fixed" data-theme="a">
-			<h1>Home Page UEK</h1>
+			<h1>UEK Note</h1>
 			<a href="#outside" data-icon="bars" data-iconpos="notext">Menu</a>
+			<a href="#plusNote" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-grid ui-nodisc-icon ui-alt-icon ui-btn-right">Add</a>
+		</div>
+		<div data-role="main" class=".bottomright">
+			<div id="printNote"></div>
+			<script>printNotes();</script>
 		</div>
 		<div data-role="footer" data-position="fixed; bottom: 0; width: 100%">
-			<h1>&copy; Michał Mirowski</h1>		
+			<h1>&copy; Jakób Woźniczka & Michał Mirowski</h1>
 		</div>
-	</div><!-- /page -->
+	</div>
 	
-	<div data-role="page" data-theme="a" id="autor">
-		<div data-role="panel" id="outside" data-theme="b" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-b ui-panel-animate ui-panel-open">
-			<div class="ui-panel-inner">
-				<ul data-role="listview" class="ui-listview">
-					<li data-icon="back" class="ui-first-child"><a href="#" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-back">Zamknij</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#autor"  style="pointer-events: none"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Autor</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#addNote" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">addNote</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#skaner"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Skaner</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#mapa" onclick="loadMap();"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Mapa</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#printNotes"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">printNotes</a></li>
-					<!--<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>-->
-				</ul>
-			</div>
+	<!--<div w3-include-html="author_page.html"></div>
+	<script>w3IncludeHTML();</script>
+	-->
+	<div data-role="page" data-theme="a" id="author">
+		<center><h2>Authors</h2></center>
+		<!--<input type= "button" value="Author" onclick="callAuthorPage()"/>-->	
+		<div data-role="header" data-position="fixed" data-theme="a">
+			<h1>UEK Note</h1>
+			<a href="#outside" data-icon="bars" data-iconpos="notext">Menu</a>
+			<a href="#plusNote" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-grid ui-nodisc-icon ui-alt-icon ui-btn-right">Add</a>
 		</div>
-		<div data-role="header">
-			<a href="#outside" data-icon="bars" data-iconpos="notext" class="ui-btn-left ui-link ui-btn ui-icon-bars ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button">Menu</a>
-			<h1>Autor</h1>
-		</div>
-		<div data-role="content" class="ui-content">	
+		<div data-role="main" class="ui-content">
 			<center>
-			<p><b>Autor aplikacji<br><br>
-			<h1>Michał Mirowski</h1><br><br>
-			michal.l.mirowski@gmail.com</b></p>
+			<p>Author name is:</p>
+			<p></br>Jakub Woźniczka Nr. Albumu: 197388</p>
+			<p></br>Michał Mirowski Nr. Albumu: 197490</p>
 			</center>
 		</div>
-		<div data-role="footer" style="position: fixed; bottom: 0; width: 100%">	
-			<h1>&copy; Michał Mirowski</h1>		
+		<div data-role="footer" data-position="fixed; bottom: 0; width: 100%">
+			<h1>&copy; Jakób Woźniczka & Michał Mirowski</h1>
 		</div>
 	</div>
-	
-	<div data-role="page" data-theme="a" id="addNote">
-		<div data-role="panel" id="outside" data-theme="b" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-b ui-panel-animate ui-panel-open">
-			<div class="ui-panel-inner">
-				<ul data-role="listview" class="ui-listview">
-					<li data-icon="back" class="ui-first-child"><a href="#" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-back">Zamknij</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#autor"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Autor</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#addNote" style="pointer-events: none" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">addNote</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#skaner"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Skaner</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#mapa" onclick="loadMap();" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Mapa</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#printNotes"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">printNotes</a></li>
-					<!--<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>-->
-				</ul>
-			</div>
-		</div>		
-		<div data-role="header">
-			<a href="#outside" data-icon="bars" data-iconpos="notext" class="ui-btn-left ui-link ui-btn ui-icon-bars ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button">Menu</a>
-			<h1>addNote</h1>
-		</div>
-		<div data-role="main" class="ui-content">	
-			<div id="createNote">
-			<div  data-role="fieldcontain">
-				<label>Note text</label>
-				<textarea  id="noteText"></textarea>
-				<input type="button" value="Add photo" onclick="makeAndAddPhotoToDb()" />
-				</div>
-				<input type="button" value="Add note" onclick="addNoteToDb()" />
-			</div>	
-		</div>
-		<div data-role="footer" data-position="fixed; bottom: 0; width: 100%">
-			<h1>&copy; Michał Mirowski</h1>		
-		</div>	
-	</div><!-- /page -->
-	
-	<div data-role="page" data-theme="a" id="skaner">		
-		<div data-role="panel" id="outside" data-theme="b" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-b ui-panel-animate ui-panel-open">
-			<div class="ui-panel-inner">
-				<ul data-role="listview" class="ui-listview">
-					<li data-icon="back" class="ui-first-child"><a href="#" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-back">Zamknij</a></li>			
-					<li class="ui-li-static ui-body-inherit"><a href="#autor"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Autor</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#addNote" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">addNote</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#skaner" style="pointer-events: none"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Skaner</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#mapa" onclick="loadMap();" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Mapa</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#printNotes"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">printNotes</a></li>
-					<!--<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>-->
-				</ul>
-			</div>
-		</div>
-		<div data-role="header">
-			<a href="#outside" data-icon="bars" data-iconpos="notext" class="ui-btn-left ui-link ui-btn ui-icon-bars ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button">Menu</a>
-			<h1>Skaner</h1>
-		</div>
-		<div data-role="content" class="ui-content">			
-			<input type="button" id="skanerbutton"  value="Skanuj"></input>
-			<ul id="mwb_list"></ul>			
-			<p id="skanerp">skaner</p>			
-		</div>	
-		<div data-role="footer" data-position="fixed; bottom: 0; width: 100%">
-			<h1>&copy; Michał Mirowski</h1>		
-		</div>
-	</div>
-	
-	<div data-role="page" data-theme="a" id="mapa" data-url="mapa">		
-		<div data-role="panel" id="outside" data-theme="b" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-b ui-panel-animate ui-panel-open">
-			<div class="ui-panel-inner">
-				<ul data-role="listview" class="ui-listview">
-					<li data-icon="back" class="ui-first-child"><a href="#" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-back">Zamknij</a></li>				
-					<li class="ui-li-static ui-body-inherit"><a href="#autor"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Autor</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#addNote" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">addNote</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#skaner"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Skaner</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#mapa" onclick="loadMap();" style="pointer-events: none"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Mapa</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#printNotes"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">printNotes</a></li>
-					<!--<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>-->				
-				</ul>
-			</div>
-		</div>		
-		<div data-role="header">
-			<a href="#outside" data-icon="bars" data-iconpos="notext" class="ui-btn-left ui-link ui-btn ui-icon-bars ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button">Menu</a>		
-			<h1>Mapa</h1>			
-		</div>	
-		<div data-role="content" class="ui-content">				
-			<!--<p id="mapapolaczenie"> Sprawdzam połączenie... </p>-->		
-			<hr>
-			<div id="googleMap" style="width: 320px; height: 400px"></div>
-			<hr>				
-		</div>	
-		<div data-role="footer" data-position="fixed; bottom: 0; width: 100%">
-			<h1>&copy; Michał Mirowski</h1>		
-		</div>	
-	</div>	
-	
-	<div data-role="page" data-theme="a" id="printNotes">		
-		<div data-role="panel" id="outside" data-theme="b" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-b ui-panel-animate ui-panel-open">
-			<div class="ui-panel-inner">
-				<ul data-role="listview" class="ui-listview">
-					<li data-icon="back" class="ui-first-child"><a href="#" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-back">Zamknij</a></li>				
-					<li class="ui-li-static ui-body-inherit"><a href="#autor"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Autor</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#addNote" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">addNote</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#skaner"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Skaner</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#mapa" onclick="loadMap();" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Mapa</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#printNotes"  style="pointer-events: none" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">printNotes</a></li>
-					<!--<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>-->				
-				</ul>
-			</div>
-		</div>
-		<div data-role="popup" id="menu" data-theme="b">
-			<ul data-role="listview" data-theme="c" data-inset="true">
-				<li data-role="divider" data-theme="b">Note Menu</li>
-				<li><button onclick=deleteNote()>Delete note</button></li>
-			</ul>
-		</div>		
-		<div data-role="header">
-			<!--<a href="#outside" data-icon="bars" data-iconpos="notext" class="ui-btn-left ui-link ui-btn ui-icon-bars ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button">Menu</a>
-			<h1>INFO</h1>-->
-		</div>
-		<div data-role="content" class="ui-content">
-			<div id="printNote"></div>
-			<script>
-				printNotes();
-			</script>
-		</div>
-		<div data-role="footer" data-position="fixed; bottom: 0; width: 100%">
-			<h1>&copy; Michał Mirowski</h1>		
-		</div>	
-	</div>
-	<!--	
-	<div data-role="page" data-theme="a" id="latarka">		
-		<div data-role="panel" id="outside" data-theme="b" class="ui-panel ui-panel-position-left ui-panel-display-reveal ui-body-b ui-panel-animate ui-panel-open">
-			<div class="ui-panel-inner">
-				<ul data-role="listview" class="ui-listview">
-					<li data-icon="back" class="ui-first-child"><a href="#" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-back">Zamknij</a></li>				
-					<li class="ui-li-static ui-body-inherit"><a href="#autor"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Autor</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#addNote" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">addNote</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#skaner"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Skaner</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#mapa" onclick="loadMap();" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Mapa</a></li>
-					<li class="ui-li-static ui-body-inherit"><a href="#printNotes"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">printNotes</a></li>
-					<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  style="pointer-events: none" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>				
-				</ul>
-			</div>
-		</div>
-		<div data-role="header">
-			<a href="#outside" data-icon="bars" data-iconpos="notext" class="ui-btn-left ui-link ui-btn ui-icon-bars ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button">Menu</a>
-			<h1>Latarka</h1>
-		</div>
-		<div data-role="content" class="ui-content">	
-			<br><br>
-			<input type="button" id="latarka1" value="ON / OFF"></input>
-			<script type="text/javascript" src="js\Flashlight.js"></script>
-			<script>			
-				$(document).ready(function(){	
-					$('#latarka1').click(function(){				
-					//window.plugins.flashlight.switchOn()				
-						$(this).text(function(i, text){
-						return text === "PUSH ME" ? "DON'T PUSH ME" : "PUSH ME";
-						})
-					window.plugins.flashlight.toggle();
-					});
-				});		
-			</script>
-		</div> 
-		<div data-role="footer" data-position="fixed; bottom: 0; width: 100%">
-			<h1>&copy; Michał Mirowski</h1>		
-		</div>
-	</div> -->
 	
 	<div data-role="panel" id="outside" data-theme="b">
 		<ul data-role="listview">
-			<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
-			<li class="ui-li-static ui-body-inherit"><a href="#autor"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Autor</a></li>
-			<li class="ui-li-static ui-body-inherit"><a href="#addNote" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">addNote</a></li>
-			<li class="ui-li-static ui-body-inherit"><a href="#skaner"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Skaner</a></li>
-			<li class="ui-li-static ui-body-inherit"><a href="#mapa" onclick="loadMap();" class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Mapa</a></li>
-			<li class="ui-li-static ui-body-inherit"><a href="#printNotes"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">printNotes</a></li>
-			<!--<li class="ui-li-static ui-body-inherit ui-last-child"><a href="#latarka"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Latarka</a></li>-->
+			<li data-icon="back" class="ui-first-child"><a href="#" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-back">Close</a></li>
+			<li class="ui-li-static ui-body-inherit"><a href="#homepage"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Home</a></li>
+			<li class="ui-li-static ui-body-inherit"><a href="#author"  class="ui-btn ui-btn-icon-right ui-icon-arrow-r" data-transition="slide">Author</a></li>
 		</ul>
 	</div>
+	
+	<div data-role="panel" id="plusNote" data-position="right" data-display="overlay" data-theme="a">
+		<ul data-role="listview">
+			<li data-icon="back" class="ui-first-child"><a href="#" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-back">Close</a></li>
+			<input type="button" value="Print note" onclick="printNotePage()()" />
+			<input type="button" value="scanCode" onclick="getCodeFunction()" />
+		</ul>
+	</div>
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript">
+		app.initialize();
+	</script>
 </body>
+
 </html>
+

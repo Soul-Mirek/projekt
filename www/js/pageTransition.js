@@ -1,10 +1,10 @@
 function addNote()
 {
-    window.location = "index.html";
+    window.location = "addNote.html";
 }
 function printNotePage()
 {
-    window.location = "index.html";
+    window.location = "printNotes.html";
 }
 function mainPage()
 {

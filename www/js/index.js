@@ -50,7 +50,6 @@ var app = {
 
 function getCodeFunction()
 {
-	
 	cordova.plugins.barcodeScanner.scan(
       function (result) {
           alert("We got a barcode\n" +
@@ -67,7 +66,7 @@ function callAuthorPage()
 {
     window.location = "author_page.html";
 }
-function callUekPage()
+/*function callUekPage()
 {
 	var networkState = navigator.network.connection.type;
     if(networkState == Connection.WIFI || networkState == Connection.CELL_3G || networkState == Connection.CELL_4G )
@@ -76,11 +75,7 @@ function callUekPage()
 	}
 	else
 	{
-		alert("Pls connnect with wify/3g/4g");
-   
+		alert("Pls connnect with wify/3g/4g");  
 	}
-}
-	
-}
-
+}*/
 

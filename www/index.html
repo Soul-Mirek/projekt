@@ -12,7 +12,8 @@
 	<link rel="stylesheet" href="css/jqm-demos.css">
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>
 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
-	<script type="text/javascript" charset="utf-8" src="cordova-1.5.0.js"></script>
+	<!--<script type="text/javascript" charset="utf-8" src="cordova-1.5.0.js"></script>-->
+	<script type="text/javascript" charset="utf-8" src="js/cordova-1.5.0.js"></script>
 	<link rel="stylesheet" href="css/themes/noteTheame.css">
 	<link rel="stylesheet" href="css/themes/noteTheame.min.css">
     <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css">
@@ -29,16 +30,7 @@
 		// navigator.notification.alert("PhoneGap is working");
 	}
 	</script>
-	<script>
-		$( document ).on( "pagecreate", function() {
-			$( "body > [data-role='panel']" ).panel();
-			$( "body > [data-role='panel'] [data-role='listview']" ).listview();
-		});
-		$( document ).one( "pageshow", function() {
-			$( "body > [data-role='header']" ).toolbar();
-			$( "body > [data-role='header'] [data-role='navbar']" ).navbar();
-		});
-	</script>
+	<script type="text/javascript" src="js/menu.js"></script>
 	<!--<script src="http://www.w3schools.com/lib/w3data.js"></script>-->
 </head>
 <body onload="onLoad()">
@@ -47,7 +39,7 @@
 			<ul data-role="listview" data-theme="b" data-inset="true">
 				<li data-role="divider" data-theme="a">Note Menu</li>
 				<li><button onclick=deleteNote()>Delete note</button></li>
-				<li><button onclick=modifyNotePage()>Modify note</button></li>
+				<li><button onclick="#modify">Modify note</button></li>
 			</ul>
 		</div>
 		<div data-role="header" data-position="fixed" data-theme="a">
@@ -111,7 +103,7 @@
 		</div>
 	</div>
 	
-		<div data-role="page" id="modify" data-theme="a">
+	<div data-role="page" id="modify" data-theme="a">
 		<div data-role="header" data-position="fixed" data-theme="a">
 			<h1>UEK Note</h1>
 			<a href="#outside" data-icon="bars" data-iconpos="notext">Menu</a>
@@ -151,119 +143,16 @@
 		</ul>
 	</div>-->
 	
-	<script>
-	$(document).ready(function()
-			{
-		var currentKey = window.sessionStorage.getItem("currentKey");
-
-		for (var i = 0; i < localStorage.length; i++){
-			var localStorageElement = localStorage.key(i);
-			if(isNaN(localStorageElement)==false)
-			{
-				if(currentKey == localStorage.getItem(localStorageElement))
-				{
-					$('#noteText').text(localStorage.getItem(localStorageElement));  
-					return;
-				}
-			}
-		} 
-
-	});
-		$(document).ready(function(){
-		$('#localizationbutton').click(function(){
-		
-			var onSuccess = function(position) {
-				var note = $('#noteText').val();
-				$('#noteText').val(note + "\n" +
-					  'Latitude: '          + position.coords.latitude          + '\n' +
-			          'Longitude: '         + position.coords.longitude         + '\n' +
-			          'Altitude: '          + position.coords.altitude          + '\n' +
-			          'Accuracy: '          + position.coords.accuracy          + '\n' +
-			          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-			          'Heading: '           + position.coords.heading           + '\n' +
-			          'Speed: '             + position.coords.speed             + '\n' +
-			          'Timestamp: '         + position.timestamp                + '\n');
-			};
-
-			// onError Callback receives a PositionError object
-			//
-			var onErrorF = function onError(error) {
-			    alert('code: '    + error.code    + '\n' +
-			          'message: ' + error.message + '\n');
-			}
-			navigator.geolocation.getCurrentPosition(onSuccess, onErrorF);
-
-	});
-	});
-	$(document).ready(function(){
-		$('#datebutton').click(function(){
-			var options = {
-					  date: new Date(),
-					  mode: 'date'
-					};
-
-					datePicker.show(options, function(date){
-						var note = $('#noteText').val();
-						$('#noteText').val(note + "\n" + "date result " + date);  
-					});
-
-	});
-	});
-		
-	</script>
+	<script type="text/javascript" src="js/storage.js"></script>
 	<script type="text/javascript">
 		var currentKey;
 		$("a").on("click", function() {
 			currentKey = $(this).text();
 		});
 	</script>
-	<script>
-	
-	$(document).ready(function(){
-		$('#localizationbutton').click(function(){
-			
-			var onSuccess = function(position) {
-				var note = $('#noteText').val();
-				$('#noteText').val(note + "\n" +
-					  'Latitude: '          + position.coords.latitude          + '\n' +
-			          'Longitude: '         + position.coords.longitude         + '\n' +
-			          'Altitude: '          + position.coords.altitude          + '\n' +
-			          'Accuracy: '          + position.coords.accuracy          + '\n' +
-			          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-			          'Heading: '           + position.coords.heading           + '\n' +
-			          'Speed: '             + position.coords.speed             + '\n' +
-			          'Timestamp: '         + position.timestamp                + '\n');
-			};
-
-			// onError Callback receives a PositionError object
-			//
-			var onErrorF = function onError(error) {
-			    alert('code: '    + error.code    + '\n' +
-			          'message: ' + error.message + '\n');
-			}
-			navigator.geolocation.getCurrentPosition(onSuccess, onErrorF);
-
-	});
-	});
-	$(document).ready(function(){
-		$('#datebutton').click(function(){
-			alert("begin");
-
-			var options = {
-					  date: new Date(),
-					  mode: 'date'
-					};
-
-					datePicker.show(options, function(date){
-						var note = $('#noteText').val();
-						$('#noteText').val(note + "\n" + "date result " + date);  
-					});
-
-	});
-	});
-		
-	</script>
-	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/localization.js"></script>
+	<!--<script type="text/javascript" src="cordova.js"></script>-->
+	<script type="text/javascript" src="js/cordova.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
 	<script type="text/javascript">
 		app.initialize();

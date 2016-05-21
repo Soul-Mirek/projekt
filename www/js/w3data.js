@@ -1,4 +1,5 @@
 /* W3Data ver 1.1 by W3Schools.com */
+//Skrypt do dołączania plików html do index.html (zrezygnowaliśmy z tego pomysłu, więc skrypt jest nie używany)
 var w3DataObject = {};
 function w3DisplayData(id, data) {
     var htmlObj, htmlTemplate, html, arr = [], a, l, rowClone, x, j, i, ii, cc, repeat, repeatObj, repeatX = "";

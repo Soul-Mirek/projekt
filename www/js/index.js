@@ -62,10 +62,10 @@ function getCodeFunction()
       }
    );
 }
-function callAuthorPage()
+/*function callAuthorPage()
 {
-    window.location = "author_page.html";
-}
+    window.location = "index.html";
+}*/
 /*function callUekPage()
 {
 	var networkState = navigator.network.connection.type;

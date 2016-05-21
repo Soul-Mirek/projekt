@@ -22,21 +22,20 @@
 			}
 			navigator.geolocation.getCurrentPosition(onSuccess, onErrorF);
 
-	});
+		});
 	});
 	$(document).ready(function(){
 		$('#datebutton').click(function(){
 			alert("begin");
 
 			var options = {
-					  date: new Date(),
-					  mode: 'date'
-					};
+				date: new Date(),
+				mode: 'date'
+			};
 
-					datePicker.show(options, function(date){
-						var note = $('#noteText').val();
-						$('#noteText').val(note + "\n" + "date result " + date);  
-					});
-
-	});
+			datePicker.show(options, function(date){
+				var note = $('#noteText').val();
+				$('#noteText').val(note + "\n" + "date result " + date);  
+			});
+		});
 	});

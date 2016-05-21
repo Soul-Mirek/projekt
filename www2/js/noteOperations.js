@@ -3,7 +3,6 @@ function addNoteToDb()
 	if (typeof(Storage) != "undefined") {
 		if(localStorage.getItem("noteNumber") === null)
 		{
-
 			localStorage.setItem("noteNumber", "0");
 		}
 		var noteNumber = localStorage.getItem("noteNumber");
@@ -11,7 +10,6 @@ function addNoteToDb()
 		localStorage.setItem("noteNumber",noteNumber );
 		localStorage.setItem(noteNumber, $('#noteText').val());
 		printNotePage();
-		
 	} 
 }
 
@@ -31,13 +29,10 @@ function getQrCode()
 				alert("Cannot get qr code") ;
 			}
 		);	
-	
 }
 
-
 function printNotes()
-{
-	 
+{	 
 	 document.write('<form class="ui-filterable"><input id="filterBasic-input" data-type="search"></form>');
 	 document.write('<ul data-role="listview" data-filter="true" data-input="#filterBasic-input">');
 	 for (var i = 0; i < localStorage.length; i++){
@@ -45,12 +40,11 @@ function printNotes()
 		if(isNaN(localStorageElement)==false)
 		{
 			document.write('<li><a href="#menu" data-rel="popup" data-role="button">' + localStorage.getItem(localStorageElement)+'</a></li>');
-
 		}
 	 }	 
 	 document.write('</ul>');	 
-	 
 }
+
 function deleteNote()
 {
 	for (var i = 0; i < localStorage.length; i++){
@@ -70,7 +64,6 @@ function deleteNote()
 function modifyNoteInDb()
 {
 	var currentKey = window.sessionStorage.getItem("currentKey");
-
 	for (var i = 0; i < localStorage.length; i++){
 		var localStorageElement = localStorage.key(i);
 		if(isNaN(localStorageElement)==false)
